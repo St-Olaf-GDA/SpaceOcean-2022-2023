@@ -10,7 +10,6 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
-*.meta
 Space Ocean/Library/Artifacts*
 Space Ocean/Library/Bee/Artifacts*	
 # MemoryCaptures can get excessive in size.
