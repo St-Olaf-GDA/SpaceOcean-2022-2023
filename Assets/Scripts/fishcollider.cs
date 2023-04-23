@@ -9,9 +9,16 @@ public class fishcollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        script = player.GetComponent<PlayerHealth>();
-        script.mineExplosion();
-        print("explosion!!!");
+        if (other.tag == "mine")
+        {
+            script = player.GetComponent<PlayerHealth>();
+            script.mineExplosion();
+            print("explosion!!!");
+        }
+        else if (other.tag == "boost")
+        {
+            player.GetComponent<PlayerMovement>().speed = 10f;
+        }
     }
 
     // Start is called before the first frame update
