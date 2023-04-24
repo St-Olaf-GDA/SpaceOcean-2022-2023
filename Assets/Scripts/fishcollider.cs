@@ -17,7 +17,7 @@ public class fishcollider : MonoBehaviour
         }
         else if (other.tag == "boost")
         {
-            player.GetComponent<PlayerMovement>().speed = 10f;
+            player.GetComponent<BezierFollow>().speedModifier = 0.1f;
         }
     }
 
