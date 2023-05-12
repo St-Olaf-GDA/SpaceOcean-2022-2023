@@ -22,6 +22,7 @@ public class BezierFollow : MonoBehaviour
 
     public CharacterController controller;
     public Animator animator;
+    //public Transform transform;
     bool isRight = false;
     bool isLeft = false;
     bool isMid = true;
@@ -58,7 +59,7 @@ public class BezierFollow : MonoBehaviour
                 StartCoroutine(coroutine);
             }
         }
-        
+
         //a lane swap immediately cancels the current coroutine and swaps the player to the other lane
         //the player's position along the current path is preserved so that they aren't reset to the beginning of the new path
         if (Input.GetKeyDown(KeyCode.D) && !isRight)
@@ -103,6 +104,20 @@ public class BezierFollow : MonoBehaviour
                 coroutineAllowed = true;
             }
         }
+
+        //turn player to face direction of movement
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+        movementDirection.Normalize();
+
+        if (movementDirection != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 0.1f * Time.deltaTime);
+        }
+    
     }
 
     private IEnumerator GoByTheRoute(Transform[] routes, int routeNum)
